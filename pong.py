@@ -18,6 +18,9 @@ def tela():
         left(90)
         forward(500)
         left(90)
+    forward (380)
+    left(90)
+    forward(500)
 
 tluke = Turtle()
 
