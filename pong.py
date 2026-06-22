@@ -45,7 +45,23 @@ darth.color("red")
 darth.shapesize(stretch_wid=8, stretch_len=1)
 darth.penup()
 darth.speed(0)
-darth.goto(360, 0) 
+darth.goto(360, 0)
+darthspeed = 15
+
+def mover_darth():
+    global darthspeed
+    y = darth.ycor()
+    y += darthspeed
+    darth.sety(y)
+    if darth.ycor() > 160:
+        darthspeed *= -1
+    if darth.ycor() < -160:
+        darthspeed *= -1
+    
+    if darth.ycor() > 250:
+        darth.sety(250)
+    if darth.ycor() < -250:
+        darth.sety(-250)
 
 p = Turtle()
 def placar():
@@ -62,8 +78,8 @@ def bola():
     b.color("pink")
     b.penup()
     b.goto(0,0)
-    b.dx = 6
-    b.dy = 6
+    b.dx = 7
+    b.dy = 7
 
 def bola_mov():
     b.setx(b.xcor() + b.dx)
@@ -89,14 +105,15 @@ def bola_mov():
         p.clear()
         p.write(f"Jogador 1:{jogador1}  | Jogador 2: {jogador2}", font = ("Courrier", 13, "bold"), align = "center")
     if (b.xcor() < -350 and b.xcor() > -370) and (b.ycor() < tluke.ycor() + 80 and b.ycor() > tluke.ycor() - 80):
-        b.setx(370)
+        b.setx(350)
         b.dx *= -1
-    if (b.xcor() < 350 and b.xcor() > 370) and (b.ycor() < darth.ycor() + 80 and b.ycor() > darth.ycor() - 80):
-        b.setx(-370)
+    if (b.xcor() > 350 and b.xcor() < 370) and (b.ycor() < darth.ycor() + 80 and b.ycor() > darth.ycor() - 80):
+        b.setx(-350)
         b.dx *= -1
-
+    mover_darth()
     update()
     ontimer(bola_mov, 10)
+
 
 tela()
 placar()
